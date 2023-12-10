@@ -41,6 +41,7 @@ export default class Person extends THREE.Object3D {
 
             const duration = this.clip.duration;
             let currentTime = { time: 0 };
+            let yoyoVal;
 
             const tween = new TWEEN.Tween(currentTime)
                 .to({ time: duration }, duration * 1000)

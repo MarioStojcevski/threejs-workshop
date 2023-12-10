@@ -62,7 +62,6 @@ export default class Environment extends THREE.Object3D {
         this.scene.add(mountains)
 
     }
-
     initTrees() {
         const treeGroupPositions = [
             { x: -1.5, z: -2 },
@@ -95,7 +94,6 @@ export default class Environment extends THREE.Object3D {
             this.scene.add(treeGroup);
         }
     }
-
 
     initChristmasTree() {
         const tree = THREE.Cache.get('christmastree').scene;

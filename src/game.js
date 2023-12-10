@@ -3,6 +3,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 import Environment from './scene/environment';
 import Player from './scene/player';
 import TPCamera from './kernel/third-person-camera'
+import { Vector3 } from 'three';
 
 export default class Game extends THREE.Object3D {
     constructor(scene, camera, renderer) {
@@ -16,10 +17,14 @@ export default class Game extends THREE.Object3D {
         this.environment = new Environment(this.scene)
         this.scene.add(this.environment);
 
+        this.playerCont = new THREE.Group();
         this.player = new Player("adventurer");
-        this.scene.add(this.player);
-        this.tpcamera = new TPCamera(this.camera, this.player)
+        this.player.position.set(0, 0, 0)
+        this.playerCont.add(this.player)
+        this.scene.add(this.playerCont);
 
+        this.camera.position.set(0, 0.5, this.player.position.z - 1)
+        this.playerCont.add(this.camera)
     }
 
     onClick(x, y) {
@@ -52,42 +57,73 @@ export default class Game extends THREE.Object3D {
     }
 
     handleKeypress(direction) {
-        console.log(direction)
-        if (direction === "back") this.player.reverseAnimation("CharacterArmature|Walk")
-        if (direction === "space") console.log(space);
-        else
-            this.player.playAnimation("CharacterArmature|Walk");
-
-        if (direction === "left") {
-            this.player.position.x += 0.1;
-            this.player.rotation.y = +Math.PI / 2
-        }
-        if (direction === "right") {
-            this.player.position.x -= 0.1;
-            this.player.rotation.y = -Math.PI / 2
-
-        }
-        if (direction === "forward") {
-            this.player.position.z += 0.1;
-            this.player.rotation.y = 0
-        }
+        console.log(direction);
         if (direction === "back") {
-            {
-                this.player.position.z -= 0.1;
-                this.player.rotation.y = 0
-
-            }
+            this.player.reverseAnimation("CharacterArmature|Walk");
+        } else if (direction === "space") {
+            console.log("space");
+        } else {
+            this.player.playAnimation("CharacterArmature|Walk");
         }
-        if (direction === "jump")
-            this.player.jump();
+
+        const rotationAmount = 0.3;
+
+        switch (direction) {
+            case "left":
+                this.moveLeft(rotationAmount);
+                break;
+            case "right":
+                this.moveRight(rotationAmount);
+                break;
+            case "forward":
+                this.moveForward();
+                break;
+            case "back":
+                this.moveBackward();
+                break;
+            case "jump":
+                this.player.jump();
+                break;
+            default:
+                break;
+        }
     }
 
+    moveLeft(rotationAmount) {
+        this.playerCont.position.x += 0.1;
+        this.playerCont.rotation.y += rotationAmount;
+    }
+
+    moveRight(rotationAmount) {
+        this.playerCont.position.x -= 0.1;
+        this.playerCont.rotation.y -= rotationAmount;
+    }
+
+    moveForward() {
+        const angle = this.playerCont.rotation.y;
+        this.moveInDirection(angle);
+    }
+
+    moveBackward() {
+        const angle = this.playerCont.rotation.y + Math.PI;
+        this.moveInDirection(angle);
+    }
+
+    moveInDirection(angle) {
+        this.playerCont.position.z += 0.1 * Math.cos(angle);
+        this.playerCont.position.x += 0.1 * Math.sin(angle);
+    }
 
 
     update(elapsed) {
         TWEEN.update();
 
-        if (this.tpcamera) this.tpcamera.update()
+        // if (this.tpcamera) this.tpcamera.update()
+        if (this.player) {
+            let position = new THREE.Vector3()
+            position = this.player.getWorldPosition(position)
+            this.camera.lookAt(position)
+        }
     }
 
 }

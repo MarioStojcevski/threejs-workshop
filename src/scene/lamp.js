@@ -19,12 +19,19 @@ export default class Lamp extends THREE.Object3D {
         this.add(this.container)
         const lamp = this.lamp = THREE.Cache.get('lamp').scene;
         lamp.position.set(0, 0, 0)
+        lamp.traverse((child) => {
+            // console.log(child.name)
+            if (child.name === "Node-Mesh_1") child.material = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff, transparent: true, opacity: 0.3
+
+            })
+        })
         const scale = 0.05;
         lamp.scale.set(scale, scale, scale);
         this.container.add(lamp);
     }
     initLight() {
-        let spotlight = new THREE.SpotLight(0xffffff,);
+        let spotlight = new THREE.SpotLight(0xFFBF00,);
         spotlight.castShadow = true;
         // spotlight.penumbra = 0.5
         // spotlight.decay = true;
@@ -37,7 +44,7 @@ export default class Lamp extends THREE.Object3D {
         spotlight.shadow.camera.fov = 30;
 
 
-        spotlight.position.set(0, 0.7, -0.32);
+        spotlight.position.set(0, 1, -0.32);
         console.log(spotlight)
 
         this.container.add(spotlight);

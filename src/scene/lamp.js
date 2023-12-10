@@ -45,10 +45,6 @@ export default class Lamp extends THREE.Object3D {
 
 
         spotlight.position.set(0, 1, -0.32);
-        console.log(spotlight)
-
         this.container.add(spotlight);
-
-
     }
 }

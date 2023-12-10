@@ -2,8 +2,7 @@ import * as THREE from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
 import Environment from './scene/environment';
 import Player from './scene/player';
-import TPCamera from './kernel/third-person-camera'
-import { Vector3 } from 'three';
+import Person from './scene/person';
 
 export default class Game extends THREE.Object3D {
     constructor(scene, camera, renderer) {
@@ -11,12 +10,21 @@ export default class Game extends THREE.Object3D {
         this.scene = scene;
         this.camera = camera;
         this.renderer = renderer;
+        this.clickableObjects = []
     }
 
-    init() {
+    async init() {
+        await this.initPlayer();
+        await this.initEnvironment();
+        await this.initNPCs();
+    }
+
+    async initEnvironment() {
         this.environment = new Environment(this.scene)
         this.scene.add(this.environment);
+    }
 
+    async initPlayer() {
         this.playerCont = new THREE.Group();
         this.player = new Player("adventurer");
         this.player.position.set(0, 0, 0)
@@ -25,6 +33,31 @@ export default class Game extends THREE.Object3D {
 
         this.camera.position.set(0, 0.5, this.player.position.z - 1)
         this.playerCont.add(this.camera)
+    }
+
+    async initNPCs() {
+        const npcData = [
+            { x: 0.5, z: 0.1, rotY: -1.5 },
+            { x: 1.5, z: -0.5, rotY: -0.3 },
+            { x: -1, z: 0.5, rotY: 1.6 },
+        ];
+
+        this.NPC = new Person("casual");
+        const scale = 0.5;
+        const position = npcData[0];
+        this.clickableObjects.push(this.NPC)
+        this.NPC.position.set(position.x, 0, position.z)
+        this.NPC.name = "NPC"
+        this.scene.add(this.NPC)
+
+        //         for (let i = 0; i < npcData.length; i++) {
+        // 
+        //             const npc = npcModel.clone();
+        //             // npc.scale.set(scale, scale, scale);
+        //             // const position = npcData[i];
+        //             // npc.position.set(position.x, 0, position.z)
+        //             // npc.rotation.y = npcData[i].rotY
+        //         }
     }
 
     onClick(x, y) {
@@ -41,14 +74,34 @@ export default class Game extends THREE.Object3D {
         raycaster.setFromCamera(mouse, this.camera);
 
         // Find intersected objects
-        const intersects = raycaster.intersectObjects(this.scene.children, true);
+        const intersects = raycaster.intersectObjects(this.clickableObjects, true);
 
         if (intersects.length > 0) {
-            // Handle the click on the first intersected object (intersects[0].object)
-            // For example, you might want to perform some action on the clicked object
             const clickedObject = intersects[0].object;
-            if (clickedObject.name) console.log('Clicked object:', clickedObject.name); else console.log('Clicked object:', clickedObject);
+            if (this.NPC && this.player && this.player.position.distanceTo(this.NPC.position) < 1) {
+                this.handleInteractWNPC();
+
+            } else {
+                console.log('Clicked object:', clickedObject);
+            }
         }
+    }
+
+    handleInteractWNPC() {
+        this.player.playAnimation("CharacterArmature|Interact");
+
+        let pos = new THREE.Vector3();
+        pos = this.NPC.getWorldPosition(pos);
+        this.player.lookAt(pos);
+        pos = this.player.getWorldPosition(pos);
+        this.NPC.lookAt(pos);
+
+        this.NPC.speak();
+        setTimeout(() => {
+            this.player.speak();
+            this.NPC.playAnimation("CharacterArmature|Interact");
+        }, 1000)
+
     }
 
     onMove(direction) {
@@ -66,7 +119,7 @@ export default class Game extends THREE.Object3D {
             this.player.playAnimation("CharacterArmature|Walk");
         }
 
-        const rotationAmount = 0.3;
+        const rotationAmount = 0.1;
 
         switch (direction) {
             case "left":
@@ -90,12 +143,10 @@ export default class Game extends THREE.Object3D {
     }
 
     moveLeft(rotationAmount) {
-        this.playerCont.position.x += 0.1;
         this.playerCont.rotation.y += rotationAmount;
     }
 
     moveRight(rotationAmount) {
-        this.playerCont.position.x -= 0.1;
         this.playerCont.rotation.y -= rotationAmount;
     }
 

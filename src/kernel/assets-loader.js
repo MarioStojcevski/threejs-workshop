@@ -7,8 +7,7 @@ import pineTrees from '/assets/city scene/Pine Trees.glb'
 import house from '/assets/city scene/House.glb'
 import lamp from '/assets/city scene/Lamp.glb'
 import adventurer from '/assets/characters/Adventurer.glb'
-
-
+import casual from '/assets/characters/Casual Character.glb'
 
 export default class AssetsLoader {
     constructor() {
@@ -28,7 +27,7 @@ export default class AssetsLoader {
             { name: 'house', asset: house },
             { name: 'lamp', asset: lamp },
             { name: 'adventurer', asset: adventurer },
-
+            { name: 'casual', asset: casual },
         ];
 
         const textures = [

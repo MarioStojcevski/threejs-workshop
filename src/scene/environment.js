@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Lamp from './lamp';
-
+import Person from './person';
 export default class Environment extends THREE.Object3D {
     constructor(scene, camera, renderer) {
         super();

@@ -31,8 +31,7 @@ export default class Game extends THREE.Object3D {
         this.playerCont.add(this.player)
         this.scene.add(this.playerCont);
 
-        this.camera.position.set(0, 0.5, this.player.position.z - 1)
-        this.playerCont.add(this.camera)
+
     }
 
     async initNPCs() {

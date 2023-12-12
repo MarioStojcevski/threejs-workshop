@@ -10,36 +10,37 @@ export default class Player extends THREE.Object3D {
     }
 
     init() {
-        this.player = new Person("adventurer");
-        this.add(this.player);
+        this.person = new Person("adventurer");
+        this.add(this.person);
     }
 
     onMove() {
 
     }
     playAnimation(name) {
-        this.player.playAnimation(name)
+        this.person.playAnimation(name)
     }
     reverseAnimation(name) {
-        this.player.reverseAnimation(name)
+        this.person.reverseAnimation(name)
     }
 
     jump() {
         if (this.jumping) return;
         this.jumping = true;
 
-        new TWEEN.Tween(this.player.position)
-            .to({ y: this.player.position.y + 0.2 }, 100)
-            .yoyo(true)
-            .repeat(1)
-            .onUpdate(() => {
-            })
-            .onComplete(() => {
-                this.jumping = false;
-            })
-            .start();
+        // new TWEEN.Tween(//what)
+        //     .to({ y: //something }, 100)
+        //     .yoyo(true)
+        //     .repeat(1)
+        //     .onUpdate(() => {
+        //     })
+        //     .onComplete(() => {
+        //         this.jumping = false;
+        //     })
+        //     .start();
     }
+
     speak() {
-        this.player.speak();
+        this.person.speak();
     }
 }

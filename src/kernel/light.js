@@ -9,7 +9,7 @@ export default class Light extends THREE.Object3D {
     }
 
     init() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 2);
         ambientLight.visible = true;
         this.scene.add(ambientLight);
         Light.ambientLight = ambientLight;
@@ -20,16 +20,16 @@ export default class Light extends THREE.Object3D {
         this.scene.add(directionalLight);
 
         Light.directionalLight = directionalLight;
-
-        directionalLight.shadow.camera.left = -6;
-        directionalLight.shadow.camera.right = 6;
-        directionalLight.shadow.camera.top = 8;
-        directionalLight.shadow.camera.bottom = -6;
-
-        directionalLight.castShadow = true;
-        directionalLight.shadow.mapSize.width = 1024;
-        directionalLight.shadow.mapSize.height = 1024;
-        directionalLight.shadow.camera.near = 0.1;
-        directionalLight.shadow.camera.far = 100;
+        
+        //         directionalLight.shadow.camera.left = -6;
+        //         directionalLight.shadow.camera.right = 6;
+        //         directionalLight.shadow.camera.top = 8;
+        //         directionalLight.shadow.camera.bottom = -6;
+        // 
+        //         directionalLight.castShadow = true;
+        //         directionalLight.shadow.mapSize.width = 1024;
+        //         directionalLight.shadow.mapSize.height = 1024;
+        //         directionalLight.shadow.camera.near = 0.1;
+        //         directionalLight.shadow.camera.far = 100;
     }
 }

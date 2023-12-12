@@ -26,11 +26,11 @@ npm run dev
 # Attributions 🙌
 A big shoutout to these awesome creators for their 3d assets:
 
-[Christmas Tree](https://poly.pizza/m/exL-ilJKlZt) by [Don Carson [CC-BY]](https://poly.pizza/u/Don%20Carson) via [Poly Pizza](https://poly.pizza/)
-[Lamp post](https://poly.pizza/m/ez9fM9NvtRB) by [Poly by Google [CC-BY]](https://poly.pizza/u/Poly%20by%20Google) via [Poly Pizza](https://poly.pizza/)
-[Ultimate Modular Men Pack](https://poly.pizza/bundle/Ultimate-Modular-Men-Pack-ZiH8muWqwQ) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
-[Medieval Village Pack](https://poly.pizza/bundle/Medieval-Village-Pack-NsHhjhlrfY) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
-[Ultimate Fantasy RTS](https://poly.pizza/bundle/Ultimate-Fantasy-RTS-nSDjmACoSU) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
+-[Christmas Tree](https://poly.pizza/m/exL-ilJKlZt) by [Don Carson [CC-BY]](https://poly.pizza/u/Don%20Carson) via [Poly Pizza](https://poly.pizza/)
+-[Lamp post](https://poly.pizza/m/ez9fM9NvtRB) by [Poly by Google [CC-BY]](https://poly.pizza/u/Poly%20by%20Google) via [Poly Pizza](https://poly.pizza/)
+-[Ultimate Modular Men Pack](https://poly.pizza/bundle/Ultimate-Modular-Men-Pack-ZiH8muWqwQ) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
+-[Medieval Village Pack](https://poly.pizza/bundle/Medieval-Village-Pack-NsHhjhlrfY) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
+-[Ultimate Fantasy RTS](https://poly.pizza/bundle/Ultimate-Fantasy-RTS-nSDjmACoSU) by [Quaternius](https://poly.pizza/u/Quaternius) via [Poly Pizza](https://poly.pizza/)
 
 # Contributing 🤝
 Feel free to make as little or as many changes to this scene as you want. You have an assets folder with a lot of unused 3d objects you can swap in to create your own environment! 🎉🎄 
